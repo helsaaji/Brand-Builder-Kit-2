@@ -1,0 +1,73 @@
+{
+  "id": "/",
+  "name": "Brand Builder Kit",
+  "short_name": "PWA Demo",
+  "description": "Aplikasi Branding UMKM template dasar Progressive Web App dengan dukungan offline dan installable.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#4F46E5",
+  "theme_color": "#4F46E5",
+  "orientation": "portrait",
+  "lang": "id",
+  "icons": [
+    {
+      "src": "./icons/icon-192x192-A.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512x512-B.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-192x192-A.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./icons/icon-512x512-B.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "./icons/screenshot1.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "PWA Template — Tampilan Mobile"
+    },
+    {
+      "src": "./icons/screenshot2.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "PWA Template — Tampilan Mobile 2"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Buka Beranda",
+      "short_name": "Home",
+      "url": "./index.html",
+      "icons": [
+        {
+          "src": "./icons/icon-192x192-A.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "categories": [
+    "productivity",
+    "utilities"
+  ]
+}
