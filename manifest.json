@@ -1,13 +1,13 @@
 {
   "id": "/",
   "name": "Brand Builder Kit",
-  "short_name": "PWA Demo",
-  "description": "Aplikasi Branding UMKM template dasar Progressive Web App dengan dukungan offline dan installable.",
+  "short_name": "Brand BBK",
+  "description": "Bangun brand UMKM profesional dalam menit — logo, warna, tipografi, mockup, dan social media kit.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#4F46E5",
-  "theme_color": "#4F46E5",
+  "background_color": "#0A0A1A",
+  "theme_color": "#7C5CFC",
   "orientation": "portrait",
   "lang": "id",
   "icons": [
@@ -42,20 +42,32 @@
       "sizes": "1080x1920",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "PWA Template — Tampilan Mobile"
+      "label": "Brand Builder Kit — Dashboard"
     },
     {
       "src": "./icons/screenshot2.png",
       "sizes": "1080x1920",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "PWA Template — Tampilan Mobile 2"
+      "label": "Brand Builder Kit — Logo Studio"
     }
   ],
   "shortcuts": [
     {
-      "name": "Buka Beranda",
-      "short_name": "Home",
+      "name": "Buat Brand Baru",
+      "short_name": "Buat Brand",
+      "url": "./index.html",
+      "icons": [
+        {
+          "src": "./icons/icon-192x192-A.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Lihat Template",
+      "short_name": "Template",
       "url": "./index.html",
       "icons": [
         {
@@ -67,7 +79,9 @@
     }
   ],
   "categories": [
-    "productivity",
-    "utilities"
-  ]
+    "business",
+    "design",
+    "productivity"
+  ],
+  "prefer_related_applications": false
 }
