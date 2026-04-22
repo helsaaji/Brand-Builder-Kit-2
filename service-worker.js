@@ -72,3 +72,64 @@ self.addEventListener("fetch", event => {
     );
   }
 });
+// ─── Background Sync ───────────────────────────────────────────────
+self.addEventListener("sync", event => {
+  if (event.tag === "background-sync") {
+    event.waitUntil(
+      (async () => {
+        try {
+          const clients = await self.clients.matchAll();
+          clients.forEach(client => {
+            client.postMessage({ type: "SYNC_COMPLETE", tag: event.tag });
+          });
+        } catch (err) {
+          console.error("Background sync gagal:", err);
+        }
+      })()
+    );
+  }
+});
+
+// ─── Periodic Background Sync ──────────────────────────────────────
+self.addEventListener("periodicsync", event => {
+  if (event.tag === "periodic-refresh") {
+    event.waitUntil(
+      (async () => {
+        try {
+          const cache = await caches.open(CACHE_NAME);
+          await cache.add(`${BASE_URL}index.html`);
+          console.log("Periodic sync: cache diperbarui");
+        } catch (err) {
+          console.error("Periodic sync gagal:", err);
+        }
+      })()
+    );
+  }
+});
+
+// ─── Push Notifications ────────────────────────────────────────────
+self.addEventListener("push", event => {
+  const data = event.data?.json() ?? {
+    title: "Brand Builder Kit",
+    body: "Ada update baru untuk kamu!",
+    icon: "./icons/icon-192x192.png",
+    badge: "./icons/icon-192x192.png"
+  };
+
+  event.waitUntil(
+    self.registration.showNotification(data.title, {
+      body: data.body,
+      icon: data.icon,
+      badge: data.badge,
+      data: { url: data.url || BASE_URL }
+    })
+  );
+});
+
+// ─── Notification Click ────────────────────────────────────────────
+self.addEventListener("notificationclick", event => {
+  event.notification.close();
+  event.waitUntil(
+    clients.openWindow(event.notification.data?.url || BASE_URL)
+  );
+});
