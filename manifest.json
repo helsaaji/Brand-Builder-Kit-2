@@ -40,14 +40,14 @@
   ],
   "screenshots": [
     {
-      "src": "./icons/screenshot1.png",
+      "src": "./icons/screenshot-A.png",
       "sizes": "1080x1920",
       "type": "image/png",
       "form_factor": "narrow",
       "label": "Brand Builder Kit — Dashboard"
     },
     {
-      "src": "./icons/screenshot2.png",
+      "src": "./icons/screenshot-B.png",
       "sizes": "1080x1920",
       "type": "image/png",
       "form_factor": "narrow",
