@@ -1124,8 +1124,12 @@ const SLOGANS_DATA={
 };
 const FONT_PAIRS=[{name:'Syne + DM Sans',d:'Syne',b:'DM Sans'},{name:'Playfair + Poppins',d:'Playfair Display',b:'Poppins'},{name:'Poppins + Roboto',d:'Poppins',b:'Roboto'},{name:'DM Sans + Roboto',d:'DM Sans',b:'Roboto'}];
 const MOCKUP_TYPES=[
-  {label:'🪪 Kartu Nama',key:'card'},{label:'📱 Feed IG',key:'feed'},{label:'👕 Kaos',key:'kaos'},
-  {label:'🛍️ Paper Bag',key:'paperbag'},{label:'📦 Packaging',key:'box'},{label:'🌐 Website',key:'web'}
+  {label:'🪪 Kartu Nama',   key:'card'},
+  {label:'🍱 Produk Makanan', key:'makanan'},
+  {label:'🍶 Botol',         key:'kaos'},
+  {label:'🛍️ Paper Bag',    key:'paperbag'},
+  {label:'📦 Packaging',     key:'box'},
+  {label:'🌐 Website',       key:'web'}
 ];
 const allTemplates=[
   {id:0,name:'Promo Instagram',type:'promo',bg:'linear-gradient(135deg,#7C5CFC,#FC5C7D)',mainTitle:'SALE 50%',sub:'Limited Time',layout:0},
@@ -1550,18 +1554,292 @@ function renderMockupDisplay(){
   const tabKey=MOCKUP_TYPES[activeMockupTab]?.key||'feed';
   display.innerHTML=renderMockupHTML(tabKey,bState.selectedLogoHTML||bState.logoSVG);
 }
-function renderMockupHTML(tabKey,logoHTML){
-  const name=bState.name||'Brand Name',c1=bState.colors.primary||'#7C5CFC',c2=bState.colors.dark||'#1A0050',c3=bState.colors.secondary||'#FC5C7D';
-  const slogan=bState.slogan||'Your Brand Story',ini=getInitials(name),sn=shortN(name);
-  const wm=(!currentUser||currentUser.status==='free')?'<div style="position:absolute;bottom:6px;right:8px;font-size:8px;opacity:.3;color:#fff;z-index:9">BBK</div>':'';
-  const logoMini=logoHTML?`<div style="transform:scale(0.5);transform-origin:center;display:flex;justify-content:center">${logoHTML}</div>`:`<div style="width:36px;height:36px;border-radius:8px;background:${c1};display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff">${ini}</div>`;
-  if(tabKey==='card'){return`<div style="background:linear-gradient(135deg,#f5f5f3,#eaeae6);padding:20px;display:flex;align-items:center;justify-content:center;min-height:180px;position:relative"><div style="display:flex;flex-direction:column;gap:8px;width:100%;max-width:240px"><div style="background:linear-gradient(135deg,${c1},${c3});border-radius:12px;padding:16px;position:relative;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.3)"><div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">${logoMini}<div style="font-size:13px;font-weight:800;color:#fff;margin-left:4px">${sn}</div></div><div style="font-size:9px;color:rgba(255,255,255,.65);font-style:italic">"${slogan.substring(0,22)}"</div></div></div>${wm}</div>`}
-  if(tabKey==='kaos'){return`<div style="background:#111;padding:20px;display:flex;align-items:center;justify-content:center;min-height:200px;position:relative"><div style="position:relative"><svg viewBox="0 0 140 160" width="160" height="180"><defs><filter id="sf"><feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="rgba(0,0,0,0.5)"/></filter></defs><path d="M20 30L2 55 25 64 25 148 115 148 115 64 138 55 120 30 88 42Q70 48 52 42Z" fill="${c1}" filter="url(#sf)"/></svg><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-42%);z-index:2">${logoHTML?`<div style="transform:scale(0.4);transform-origin:center">${logoHTML}</div>`:`<div style="text-align:center;color:#fff;font-size:14px;font-weight:800">${ini}</div>`}</div></div>${wm}</div>`}
-  if(tabKey==='paperbag'){return`<div style="background:linear-gradient(135deg,#f0ede8,#e5dfd4);padding:20px;display:flex;align-items:center;justify-content:center;min-height:180px;position:relative"><div style="background:linear-gradient(180deg,#f5f0e8,#ede5d8);border-radius:4px;padding:14px;box-shadow:0 10px 36px rgba(0,0,0,.2);min-height:130px;width:110px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden"><div style="position:absolute;top:0;left:0;right:0;height:5px;background:${c1}"></div><div style="margin-top:8px">${logoMini}</div><div style="font-size:7px;color:#94a3b8;margin-top:6px;text-align:center;font-style:italic">"${slogan.substring(0,16)}"</div></div>${wm}</div>`}
-  if(tabKey==='box'){return`<div style="background:linear-gradient(135deg,#f8f4ef,#eee8df);padding:20px;display:flex;align-items:center;justify-content:center;min-height:180px;position:relative"><div><div style="width:130px;height:90px;background:${c1};border-radius:8px 8px 0 0;position:relative;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,.25);display:flex;flex-direction:column;align-items:center;justify-content:center"><div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.1),transparent)"></div><div style="z-index:1">${logoMini}<div style="font-size:6px;letter-spacing:.12em;color:rgba(255,255,255,.65);text-align:center;margin-top:2px">${sn.toUpperCase()}</div></div></div><div style="width:130px;height:44px;background:${c2};border-radius:0 0 8px 8px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 28px rgba(0,0,0,.2)"><div style="font-size:8px;color:rgba(255,255,255,.7);font-style:italic">"${slogan.substring(0,20)}"</div></div></div>${wm}</div>`}
-  if(tabKey==='web'){return`<div style="background:#0a0a1a;padding:14px;min-height:200px;position:relative"><div style="background:#111;border-radius:10px;overflow:hidden;box-shadow:0 0 40px rgba(124,92,252,.2)"><div style="background:#1a1a2e;padding:7px 10px;display:flex;align-items:center;gap:7px;border-bottom:1px solid rgba(255,255,255,.07)"><div style="display:flex;gap:4px">${['#ff5f56','#ffbd2e','#27c93f'].map(c=>`<div style="width:7px;height:7px;border-radius:50%;background:${c}"></div>`).join('')}</div><div style="flex:1;background:rgba(255,255,255,.06);border-radius:4px;height:14px;display:flex;align-items:center;padding:0 8px;font-size:7px;color:rgba(255,255,255,.3)">www.${sn.toLowerCase().replace(/\s+/g,'')}.com</div></div><div style="background:linear-gradient(135deg,${c1},${c3});padding:18px;display:flex;align-items:center;gap:10px">${logoMini}<div><div style="font-size:12px;font-weight:700;color:#fff">${sn}</div><div style="font-size:8px;color:rgba(255,255,255,.65)">${bState.category||'Brand'}</div></div></div><div style="padding:10px"><div style="height:5px;border-radius:100px;background:rgba(255,255,255,.1);width:80%;margin-bottom:4px"></div><div style="height:5px;border-radius:100px;background:rgba(255,255,255,.06);width:60%;margin-bottom:8px"></div><div style="background:${c1};color:#fff;border-radius:100px;padding:5px 12px;font-size:8px;font-weight:700;display:inline-block">Hubungi Kami →</div></div></div>${wm}</div>`}
-  // feed default
-  return`<div style="background:#0a0a1a;min-height:200px;position:relative"><div style="display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.07)"><div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,${c1},${c3});display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff;flex-shrink:0">${name.substring(0,1)}</div><div style="font-size:11px;font-weight:600;color:var(--text)">${sn.toLowerCase().replace(/\s+/g,'_')}</div><div style="margin-left:auto;font-size:15px;color:rgba(255,255,255,.3)">⋯</div></div><div style="background:linear-gradient(135deg,${c1},${c3});min-height:160px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:18px;position:relative;overflow:hidden">${logoHTML?`<div style="transform:scale(0.55);transform-origin:center;margin-bottom:4px">${logoHTML}</div>`:`<div style="width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#fff;margin-bottom:8px">${ini}</div>`}<div style="font-size:16px;font-weight:800;color:#fff;margin-bottom:4px">${sn}</div><div style="font-size:10px;color:rgba(255,255,255,.7);font-style:italic">"${slogan.substring(0,26)}"</div>${wm}</div><div style="padding:8px 12px"><div style="font-size:18px;color:rgba(255,255,255,.6)">♡ 💬 ↗</div></div></div>`;
+function renderMockupHTML(tabKey, logoHTML) {
+  const name    = bState.name || 'Brand Name';
+  const c1      = bState.colors.primary    || '#7C5CFC';
+  const c2      = bState.colors.secondary  || '#FC5C7D';
+  const c3      = bState.colors.dark       || '#1A0050';
+  const slogan  = bState.slogan || 'Your Brand Story';
+  const ini     = getInitials(name);
+  const sn      = shortN(name);
+ 
+  // Watermark untuk free user
+  const wm = (!currentUser || currentUser.status === 'free')
+    ? `<div style="position:absolute;bottom:8px;right:10px;font-size:9px;
+                   color:rgba(255,255,255,0.35);z-index:20;letter-spacing:.08em;
+                   font-weight:600;pointer-events:none">BBK</div>`
+    : '';
+ 
+  // ── Blok logo + nama brand (dipakai di semua mockup) ──────────
+  const logoBlock = `
+    <div style="display:flex;flex-direction:column;align-items:center;
+                justify-content:center;gap:4px;text-align:center;">
+      ${logoHTML
+        ? `<div style="transform:scale(0.5);transform-origin:center;
+                       filter:drop-shadow(0 4px 12px rgba(0,0,0,0.55));
+                       margin-bottom:-10px;margin-top:-10px">${logoHTML}</div>`
+        : `<div style="width:44px;height:44px;border-radius:12px;background:${c1};
+                       display:flex;align-items:center;justify-content:center;
+                       font-size:16px;font-weight:800;color:#fff;
+                       box-shadow:0 4px 16px rgba(0,0,0,0.4)">${ini}</div>`
+      }
+      <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:800;
+                  color:#fff;letter-spacing:.06em;
+                  text-shadow:0 2px 10px rgba(0,0,0,0.7);line-height:1.2;">
+        ${sn.toUpperCase()}
+      </div>
+    </div>`;
+ 
+  // ── Blok logo + nama untuk overlay bawah (feed/makanan) ───────
+  const logoBarLeft = `
+    <div style="display:flex;align-items:center;gap:6px;">
+      ${logoHTML
+        ? `<div style="transform:scale(0.38);transform-origin:left center;
+                       flex-shrink:0;width:40px;margin-right:-18px;">${logoHTML}</div>`
+        : `<div style="width:28px;height:28px;border-radius:7px;background:${c1};
+                       display:flex;align-items:center;justify-content:center;
+                       font-size:10px;font-weight:800;color:#fff;flex-shrink:0">${ini}</div>`
+      }
+      <div>
+        <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:800;
+                    color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.5)">
+          ${sn.toUpperCase()}
+        </div>
+        <div style="font-size:9px;color:rgba(255,255,255,0.6);font-style:italic;margin-top:1px">
+          ${slogan.substring(0, 22)}
+        </div>
+      </div>
+    </div>`;
+ 
+  // ── Shared wrapper style ──────────────────────────────────────
+  const wrapStyle = `position:relative;min-height:200px;overflow:hidden;border-radius:12px;`;
+  const overlayDark = `position:absolute;inset:0;z-index:1;`;
+ 
+  // ─────────────────────────────────────────────────────────────
+  // 🪪 KARTU NAMA — mockup-kartunama.jpeg
+  // ─────────────────────────────────────────────────────────────
+  if (tabKey === 'card') {
+    return `
+      <div style="${wrapStyle}">
+        <img src="./icons/mockup-kartunama.jpeg"
+          style="width:100%;height:100%;object-fit:cover;display:block;min-height:200px;"
+          onerror="this.style.display='none';this.parentElement.style.background=
+                   'linear-gradient(135deg,${c1},${c2})'">
+        <div style="${overlayDark}
+          background:linear-gradient(135deg,rgba(0,0,0,0.42),rgba(0,0,0,0.2))"></div>
+ 
+        <!-- Kartu bisnis di tengah -->
+        <div style="position:absolute;inset:0;z-index:5;
+                    display:flex;align-items:center;justify-content:center;">
+          <div style="
+            background:linear-gradient(135deg,${c1}ee,${c2}cc);
+            border-radius:16px;padding:18px 24px;
+            box-shadow:0 14px 44px rgba(0,0,0,0.55);
+            border:1px solid rgba(255,255,255,0.15);
+            min-width:190px;text-align:center;
+            backdrop-filter:blur(6px);
+          ">
+            ${logoBlock}
+            <div style="width:100%;height:1px;background:rgba(255,255,255,0.2);margin:10px 0;"></div>
+            <div style="font-size:9px;color:rgba(255,255,255,0.65);
+                        letter-spacing:.1em;font-style:italic;">
+              "${slogan.substring(0, 26)}"
+            </div>
+          </div>
+        </div>
+        ${wm}
+      </div>`;
+  }
+ 
+  // ─────────────────────────────────────────────────────────────
+  // 🍱 PRODUK MAKANAN — mockup-makanan.jpeg
+  // ─────────────────────────────────────────────────────────────
+  if (tabKey === 'makanan') {
+    return `
+      <div style="${wrapStyle}">
+        <img src="./icons/mockup-makanan.jpeg"
+          style="width:100%;height:100%;object-fit:cover;display:block;min-height:200px;"
+          onerror="this.style.display='none';this.parentElement.style.background=
+                   'linear-gradient(135deg,${c1},${c2})'">
+        <div style="${overlayDark}
+          background:linear-gradient(180deg,rgba(0,0,0,0.05) 40%,rgba(0,0,0,0.65))"></div>
+ 
+        <!-- Header IG style -->
+        <div style="position:absolute;top:10px;left:12px;right:12px;z-index:5;
+                    display:flex;align-items:center;gap:8px;">
+          <div style="width:26px;height:26px;border-radius:50%;
+                      background:linear-gradient(135deg,${c1},${c2});
+                      display:flex;align-items:center;justify-content:center;
+                      font-size:9px;font-weight:800;color:#fff;
+                      border:1.5px solid rgba(255,255,255,0.5);">${ini}</div>
+          <div style="font-size:10px;font-weight:600;color:#fff;
+                      text-shadow:0 1px 4px rgba(0,0,0,0.5);">
+            ${sn.toLowerCase().replace(/\s+/g,'_')}
+          </div>
+        </div>
+ 
+        <!-- Overlay bawah -->
+        <div style="position:absolute;bottom:0;left:0;right:0;z-index:5;
+                    padding:12px 14px;
+                    background:linear-gradient(0deg,rgba(0,0,0,0.72),transparent);">
+          ${logoBarLeft}
+        </div>
+        ${wm}
+      </div>`;
+  }
+ 
+  // ─────────────────────────────────────────────────────────────
+  // 🍶 BOTOL — mockup-botol.jpeg
+  // ─────────────────────────────────────────────────────────────
+  if (tabKey === 'kaos') {
+    return `
+      <div style="${wrapStyle}">
+        <img src="./icons/mockup-botol.jpeg"
+          style="width:100%;height:100%;object-fit:cover;display:block;min-height:210px;"
+          onerror="this.style.display='none';this.parentElement.style.background=
+                   'linear-gradient(135deg,#111,#1a1a2e)'">
+        <div style="${overlayDark}
+          background:linear-gradient(180deg,rgba(0,0,0,0.08),rgba(0,0,0,0.5))"></div>
+ 
+        <!-- Label stiker botol di tengah -->
+        <div style="position:absolute;top:50%;left:50%;
+                    transform:translate(-50%,-56%);z-index:5;">
+          <div style="
+            background:linear-gradient(145deg,${c1}f2,${c3}f2);
+            border-radius:12px;padding:12px 18px;
+            box-shadow:0 10px 36px rgba(0,0,0,0.6);
+            border:1px solid rgba(255,255,255,0.14);
+            text-align:center;min-width:88px;
+            backdrop-filter:blur(8px);
+          ">
+            ${logoBlock}
+          </div>
+        </div>
+        ${wm}
+      </div>`;
+  }
+ 
+  // ─────────────────────────────────────────────────────────────
+  // 🛍️ PAPER BAG — mockup-paperbag.jpeg
+  // ─────────────────────────────────────────────────────────────
+  if (tabKey === 'paperbag') {
+    return `
+      <div style="${wrapStyle}">
+        <img src="./icons/mockup-paperbag.jpeg"
+          style="width:100%;height:100%;object-fit:cover;display:block;min-height:200px;"
+          onerror="this.style.display='none';this.parentElement.style.background=
+                   'linear-gradient(135deg,#f5f0e8,#ede5d8)'">
+        <div style="${overlayDark}background:rgba(0,0,0,0.12)"></div>
+ 
+        <!-- Stiker di paper bag -->
+        <div style="position:absolute;top:50%;left:50%;
+                    transform:translate(-50%,-54%);z-index:5;">
+          <div style="
+            background:linear-gradient(145deg,${c1}f5,${c3}e5);
+            border-radius:14px;padding:13px 20px;
+            box-shadow:0 10px 32px rgba(0,0,0,0.45);
+            border:1px solid rgba(255,255,255,0.16);
+            text-align:center;
+            backdrop-filter:blur(6px);
+          ">
+            ${logoBlock}
+          </div>
+        </div>
+        ${wm}
+      </div>`;
+  }
+ 
+  // ─────────────────────────────────────────────────────────────
+  // 📦 PACKAGING / BOX — mockup-packaging.jpeg
+  // ─────────────────────────────────────────────────────────────
+  if (tabKey === 'box') {
+    return `
+      <div style="${wrapStyle}">
+        <img src="./icons/mockup-packaging.jpeg"
+          style="width:100%;height:100%;object-fit:cover;display:block;min-height:200px;"
+          onerror="this.style.display='none';this.parentElement.style.background=
+                   'linear-gradient(135deg,${c1},${c3})'">
+        <div style="${overlayDark}
+          background:linear-gradient(135deg,rgba(0,0,0,0.32),rgba(0,0,0,0.12))"></div>
+ 
+        <!-- Stiker bulat di packaging -->
+        <div style="position:absolute;top:50%;left:50%;
+                    transform:translate(-50%,-50%);z-index:5;">
+          <div style="
+            background:linear-gradient(135deg,${c1}f5,${c2}d5);
+            border-radius:50%;width:108px;height:108px;
+            display:flex;align-items:center;justify-content:center;
+            box-shadow:0 12px 44px rgba(0,0,0,0.55);
+            border:2.5px solid rgba(255,255,255,0.22);
+          ">
+            ${logoBlock}
+          </div>
+        </div>
+        ${wm}
+      </div>`;
+  }
+ 
+  // ─────────────────────────────────────────────────────────────
+  // 🌐 WEBSITE — tetap CSS (tidak ada JPEG-nya)
+  // ─────────────────────────────────────────────────────────────
+  if (tabKey === 'web') {
+    return `
+      <div style="background:#0a0a1a;padding:14px;min-height:200px;
+                  position:relative;border-radius:12px;">
+        <div style="background:#111;border-radius:10px;overflow:hidden;
+                    box-shadow:0 0 40px rgba(124,92,252,.2)">
+          <div style="background:#1a1a2e;padding:7px 10px;display:flex;
+                      align-items:center;gap:7px;
+                      border-bottom:1px solid rgba(255,255,255,.07)">
+            <div style="display:flex;gap:4px">
+              ${['#ff5f56','#ffbd2e','#27c93f'].map(c =>
+                `<div style="width:7px;height:7px;border-radius:50%;background:${c}"></div>`
+              ).join('')}
+            </div>
+            <div style="flex:1;background:rgba(255,255,255,.06);border-radius:4px;
+                        height:14px;display:flex;align-items:center;padding:0 8px;
+                        font-size:7px;color:rgba(255,255,255,.3)">
+              www.${sn.toLowerCase().replace(/\s+/g,'')}.com
+            </div>
+          </div>
+          <div style="background:linear-gradient(135deg,${c1},${c2});
+                      padding:18px;display:flex;align-items:center;gap:8px;">
+            ${logoHTML
+              ? `<div style="transform:scale(0.38);transform-origin:left center;
+                             flex-shrink:0;margin-right:-24px;">${logoHTML}</div>`
+              : `<div style="width:32px;height:32px;border-radius:8px;
+                             background:rgba(255,255,255,.2);display:flex;
+                             align-items:center;justify-content:center;
+                             font-size:11px;font-weight:800;color:#fff">${ini}</div>`
+            }
+            <div>
+              <div style="font-size:12px;font-weight:700;color:#fff;">${sn}</div>
+              <div style="font-size:8px;color:rgba(255,255,255,.65);">
+                ${bState.category || 'Brand'}
+              </div>
+            </div>
+          </div>
+          <div style="padding:10px">
+            <div style="height:5px;border-radius:100px;background:rgba(255,255,255,.1);
+                        width:80%;margin-bottom:4px;"></div>
+            <div style="height:5px;border-radius:100px;background:rgba(255,255,255,.06);
+                        width:60%;margin-bottom:8px;"></div>
+            <div style="background:${c1};color:#fff;border-radius:100px;
+                        padding:5px 12px;font-size:8px;font-weight:700;display:inline-block;">
+              Hubungi Kami →
+            </div>
+          </div>
+        </div>
+        ${wm}
+      </div>`;
+  }
+ 
+  // Fallback
+  return `<div style="background:linear-gradient(135deg,${c1},${c2});
+                      min-height:200px;border-radius:12px;
+                      display:flex;align-items:center;justify-content:center;">
+    ${logoBlock}
+  </div>`;
 }
 function renderPaletteChips(){
   const cont=document.getElementById('pgs-chips');if(!cont)return;cont.innerHTML='';

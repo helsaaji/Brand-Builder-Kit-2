@@ -1,5 +1,5 @@
 {
-  "id": "/",
+  "id": "./index.html",
   "name": "Brand Builder Kit",
   "short_name": "Brand BBK",
   "description": "Bangun brand UMKM profesional dalam menit — logo, warna, tipografi, mockup, dan social media kit.",
@@ -59,7 +59,7 @@
       "name": "Buat Brand Baru",
       "short_name": "Buat Brand",
       "description": "Buat brand UMKM baru dari awal",
-      "url": "./index.html",
+      "url": "./index.html?action=new",
       "icons": [
         {
           "src": "./icons/icon-192x192.png",
@@ -72,7 +72,7 @@
       "name": "Lihat Template",
       "short_name": "Template",
       "description": "Jelajahi template brand yang tersedia",
-      "url": "./index.html",
+      "url": "./index.html?action=template",
       "icons": [
         {
           "src": "./icons/icon-192x192.png",
@@ -87,5 +87,6 @@
     "design",
     "productivity"
   ],
-  "prefer_related_applications": false
+  "prefer_related_applications": false,
+  "related_applications": []
 }
