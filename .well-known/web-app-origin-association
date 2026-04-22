@@ -1,0 +1,10 @@
+{
+  "web_apps": [
+    {
+      "manifest": "/Brand-Builder-Kit-2/manifest.json",
+      "details": {
+        "paths": ["/*"]
+      }
+    }
+  ]
+}
