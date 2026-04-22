@@ -1,66 +1,170 @@
 {
-  "id": "/",
+  "id": "./index.html",
   "name": "Brand Builder Kit",
   "short_name": "Brand BBK",
   "description": "Bangun brand UMKM profesional dalam menit — logo, warna, tipografi, mockup, dan social media kit.",
-  "start_url": "/",
-  "scope": "/",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui", "browser"],
   "background_color": "#0A0A1A",
   "theme_color": "#7C5CFC",
   "orientation": "portrait",
   "lang": "id",
-
+  "dir": "ltr",
+  "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ce4e53b7",
   "icons": [
     {
       "src": "./icons/icon-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "./icons/icon-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
-      "src": "./icons/icon-maskable-192.png",
+      "src": "./icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "./icons/icon-maskable-512.png",
+      "src": "./icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
     }
   ],
-
   "screenshots": [
     {
       "src": "./icons/screenshot-A.png",
       "sizes": "1080x1920",
       "type": "image/png",
-      "form_factor": "narrow"
+      "form_factor": "narrow",
+      "label": "Brand Builder Kit — Dashboard"
+    },
+    {
+      "src": "./icons/screenshot-B.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Brand Builder Kit — Logo Studio"
     },
     {
       "src": "./icons/screenshot-wide.png",
-      "sizes": "1280x720",
+      "sizes": "1920x1080",
       "type": "image/png",
-      "form_factor": "wide"
+      "form_factor": "wide",
+      "label": "Brand Builder Kit — Desktop View"
     }
   ],
-
   "shortcuts": [
     {
       "name": "Buat Brand Baru",
-      "url": "/?action=new"
+      "short_name": "Buat Brand",
+      "description": "Buat brand UMKM baru dari awal",
+      "url": "./index.html?action=new",
+      "icons": [
+        {
+          "src": "./icons/icon-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     },
     {
       "name": "Lihat Template",
-      "url": "/?action=template"
+      "short_name": "Template",
+      "description": "Jelajahi template brand yang tersedia",
+      "url": "./index.html?action=template",
+      "icons": [
+        {
+          "src": "./icons/icon-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     }
   ],
-
-  "categories": ["business", "design", "productivity"]
+  "categories": [
+    "business",
+    "design",
+    "productivity"
+  ],
+  "prefer_related_applications": false,
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://helsaaji.github.io/Brand-Builder-Kit-2/manifest.json"
+    }
+  ],
+  "launch_handler": {
+    "client_mode": ["navigate-existing", "auto"]
+  },
+  "share_target": {
+    "action": "./index.html?action=share",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "file_handlers": [
+    {
+      "action": "./index.html?action=open",
+      "accept": {
+        "image/png": [".png"],
+        "image/jpeg": [".jpg", ".jpeg"],
+        "image/svg+xml": [".svg"]
+      }
+    }
+  ],
+  "protocol_handlers": [
+    {
+      "protocol": "web+brandbbk",
+      "url": "./index.html?protocol=%s"
+    }
+  ],
+  "scope_extensions": [
+    {
+      "origin": "https://helsaaji.github.io"
+    }
+  ],
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "widgets": [
+    {
+      "name": "Brand BBK Widget",
+      "short_name": "Brand BBK",
+      "description": "Akses cepat Brand Builder Kit",
+      "tag": "brand-bbk-widget",
+      "ms_ac_template": "./widgets/template.json",
+      "data": "./widgets/data.json",
+      "type": "application/json",
+      "screenshots": [
+        {
+          "src": "./icons/screenshot-A.png",
+          "sizes": "1080x1920",
+          "label": "Brand BBK Widget Preview"
+        }
+      ],
+      "icons": [
+        {
+          "src": "./icons/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ],
+      "auth": false,
+      "update": 86400
+    }
+  ],
+  "note_taking": {
+    "new_note_url": "./index.html?action=new-note"
+  }
 }
