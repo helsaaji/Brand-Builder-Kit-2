@@ -1,92 +1,66 @@
 {
-  "id": "./index.html",
+  "id": "/",
   "name": "Brand Builder Kit",
   "short_name": "Brand BBK",
   "description": "Bangun brand UMKM profesional dalam menit — logo, warna, tipografi, mockup, dan social media kit.",
-  "start_url": "./index.html",
-  "scope": "./",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "display_override": ["window-controls-overlay", "standalone", "minimal-ui", "browser"],
   "background_color": "#0A0A1A",
   "theme_color": "#7C5CFC",
   "orientation": "portrait",
   "lang": "id",
-  "dir": "ltr",
+
   "icons": [
     {
       "src": "./icons/icon-192x192.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
+      "type": "image/png"
     },
     {
       "src": "./icons/icon-512x512.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
+      "type": "image/png"
     },
     {
-      "src": "./icons/icon-192x192.png",
+      "src": "./icons/icon-maskable-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "./icons/icon-512x512.png",
+      "src": "./icons/icon-maskable-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
     }
   ],
+
   "screenshots": [
     {
       "src": "./icons/screenshot-A.png",
       "sizes": "1080x1920",
       "type": "image/png",
-      "form_factor": "narrow",
-      "label": "Brand Builder Kit — Dashboard"
+      "form_factor": "narrow"
     },
     {
-      "src": "./icons/screenshot-B.png",
-      "sizes": "1080x1920",
+      "src": "./icons/screenshot-wide.png",
+      "sizes": "1280x720",
       "type": "image/png",
-      "form_factor": "narrow",
-      "label": "Brand Builder Kit — Logo Studio"
+      "form_factor": "wide"
     }
   ],
+
   "shortcuts": [
     {
       "name": "Buat Brand Baru",
-      "short_name": "Buat Brand",
-      "description": "Buat brand UMKM baru dari awal",
-      "url": "./index.html?action=new",
-      "icons": [
-        {
-          "src": "./icons/icon-192x192.png",
-          "sizes": "192x192",
-          "type": "image/png"
-        }
-      ]
+      "url": "/?action=new"
     },
     {
       "name": "Lihat Template",
-      "short_name": "Template",
-      "description": "Jelajahi template brand yang tersedia",
-      "url": "./index.html?action=template",
-      "icons": [
-        {
-          "src": "./icons/icon-192x192.png",
-          "sizes": "192x192",
-          "type": "image/png"
-        }
-      ]
+      "url": "/?action=template"
     }
   ],
-  "categories": [
-    "business",
-    "design",
-    "productivity"
-  ],
-  "prefer_related_applications": false,
-  "related_applications": []
+
+  "categories": ["business", "design", "productivity"]
 }
