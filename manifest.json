@@ -8,8 +8,9 @@
   "display": "standalone",
   "background_color": "#0A0A1A",
   "theme_color": "#7C5CFC",
-  "orientation": "portrait",
+  "orientation": "portrait-primary",
   "lang": "id",
+  "dir": "ltr",
   "icons": [
     {
       "src": "./icons/icon-192x192-A.png",
@@ -56,6 +57,7 @@
     {
       "name": "Buat Brand Baru",
       "short_name": "Buat Brand",
+      "description": "Mulai membuat brand baru dari awal",
       "url": "./index.html",
       "icons": [
         {
@@ -68,6 +70,7 @@
     {
       "name": "Lihat Template",
       "short_name": "Template",
+      "description": "Jelajahi template brand yang tersedia",
       "url": "./index.html",
       "icons": [
         {
@@ -78,10 +81,7 @@
       ]
     }
   ],
-  "categories": [
-    "business",
-    "design",
-    "productivity"
-  ],
-  "prefer_related_applications": false
+  "categories": ["business", "design", "productivity"],
+  "prefer_related_applications": false,
+  "display_override": ["standalone", "minimal-ui", "browser"]
 }
