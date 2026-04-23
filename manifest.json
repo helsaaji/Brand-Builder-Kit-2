@@ -1,7 +1,7 @@
 {
   "id": "./index.html",
   "name": "Brand Builder Kit",
-  "short_name": "Brand BBK",
+  "short_name": "BBK",
   "description": "Bangun brand UMKM profesional dalam menit — logo, warna, tipografi, mockup, dan social media kit.",
   "start_url": "./index.html",
   "scope": "./",
