@@ -1,0 +1,25 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Brand Builder Kit",
+      "weight": "Bolder",
+      "size": "Medium"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Bangun brand UMKM profesional dalam menit",
+      "wrap": true,
+      "size": "Small"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "title": "Buka Aplikasi",
+      "url": "https://helsaaji.github.io/Brand-Builder-Kit-2/"
+    }
+  ]
+}
