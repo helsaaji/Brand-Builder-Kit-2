@@ -1468,7 +1468,7 @@ function buildLogoSVG(style,name,c1,c2,c3){
 }
 function initLogoStudio(){
   if(!bState.accentColor)bState.accentColor=bState.colors.primary;
-  const logoName=document.getElementById('logo-name-input').value||bState.name||'Brand';
+  const logoName=document.getElementById('logo -name-input').value||bState.name||'Brand';
   bState.name=bState.name||logoName;
   renderLogoGrid();renderAccentSwatches();
   applyLogoToAll(bState.logoVariant);
@@ -1508,7 +1508,7 @@ function applyLogoToAll(idx){
     render.innerHTML=svgStr;nameEl.textContent=`Variasi ${idx+1}`;preview.style.display='flex';
   }
 }
-function renderAccentSwatches(){
+function renderAccentSwatches(){ 
   const cont=document.getElementById('accent-swatches');if(!cont)return;
   const palette=['#7C5CFC','#FC5C7D','#5CF0FC','#FFD700','#C9A96E','#3DDA84','#FF6B6B','#ffffff'];
   cont.innerHTML='';
