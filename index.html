@@ -26,6 +26,8 @@
 <meta property="og:type" content="website">
 
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600;700;800&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+<!-- html2canvas untuk download mockup PNG resolusi tinggi -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" crossorigin="anonymous"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -320,44 +322,65 @@ input[type="color"]{width:46px;height:46px;border:none;border-radius:var(--radiu
 .style-chip:hover{border-color:var(--border-hover);color:var(--text)}
 .style-chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
 
-/* STEP 5 - MOCKUP */
-.mockup-sync-bar{background:rgba(124,92,252,.08);border:1px solid rgba(124,92,252,.2);border-radius:8px;padding:9px 12px;display:flex;align-items:center;gap:7px;margin-bottom:12px}
-.sync-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);animation:pulse 1.5s ease infinite;flex-shrink:0}
-.sync-text{font-size:10px;color:var(--accent);font-weight:600}
-.mockup-tabs{display:flex;gap:5px;margin-bottom:12px;overflow-x:auto;scrollbar-width:none}
+/* STEP 5 - MOCKUP — REFACTORED */
+@keyframes shimmer{0%{background-position:-400px 0}100%{background-position:400px 0}}
+.mockup-sync-bar{background:rgba(124,92,252,.08);border:1px solid rgba(124,92,252,.2);border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.sync-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 1.5s ease infinite;flex-shrink:0}
+.sync-text{font-size:11px;color:var(--accent);font-weight:600}
+/* Tab mockup scroll premium */
+.mockup-tabs{display:flex;gap:8px;margin-bottom:16px;overflow-x:auto;scrollbar-width:none;padding:4px 0 8px;-webkit-overflow-scrolling:touch}
 .mockup-tabs::-webkit-scrollbar{display:none}
-.mkp-tab{padding:6px 12px;border-radius:100px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--text2);white-space:nowrap;transition:var(--transition);flex-shrink:0}
-.mkp-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
-.mockup-display{border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);cursor:pointer;transition:var(--transition)}
-.mockup-display:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
-.mockup-hint{text-align:center;font-size:10px;color:var(--text3);margin-top:6px}
-.mockup-dl-bar{display:flex;gap:8px;margin-top:12px}
-.dl-btn{flex:1;padding:10px;border-radius:100px;font-family:var(--font-body);font-size:12px;font-weight:600;cursor:pointer;border:none;transition:var(--transition)}
-.dl-btn-primary{background:var(--accent);color:#fff;box-shadow:0 4px 15px rgba(124,92,252,.35)}
-.dl-btn-primary:hover{transform:translateY(-2px)}
-.dl-btn-ghost{background:var(--surface);color:var(--text2);border:1px solid var(--border)}
-.dl-btn-ghost:hover{background:var(--surface2);color:var(--text)}
-.palette-gen-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;margin-top:12px}
-.pgs-title{font-size:10px;font-weight:700;color:var(--text2);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em}
-.pgs-chips{display:flex;gap:5px}
-.pgc{flex:1;height:32px;border-radius:6px;cursor:pointer;transition:var(--transition);border:2px solid transparent}
-.pgc:hover{transform:scale(1.08)}.pgc.active{border-color:var(--text)}
-.font-rec-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;margin-top:10px}
-.fr-title{font-size:10px;font-weight:700;color:var(--text2);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em}
-.fr-pairs{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.fr-pair{border:1px solid var(--border);border-radius:8px;padding:9px;cursor:pointer;transition:var(--transition)}
+.mkp-tab{padding:8px 14px;border-radius:100px;font-size:11px;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:var(--surface);color:var(--text2);white-space:nowrap;transition:var(--transition);flex-shrink:0;letter-spacing:.02em}
+.mkp-tab:hover{border-color:var(--border-hover);color:var(--text);background:var(--surface2)}
+.mkp-tab.active{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border-color:transparent;box-shadow:0 4px 16px rgba(124,92,252,.35)}
+/* Mockup display wrapper */
+.mockup-display-wrapper{border-radius:24px;overflow:hidden;border:1px solid var(--border);background:var(--surface);box-shadow:0 20px 60px rgba(0,0,0,.35);transition:var(--transition);cursor:pointer;position:relative}
+.mockup-display-wrapper:hover{transform:translateY(-4px);box-shadow:0 28px 80px rgba(0,0,0,.5);border-color:rgba(124,92,252,.3)}
+.mockup-display-wrapper::before{content:'🔍 Tap untuk fullscreen';position:absolute;bottom:12px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.6);color:rgba(255,255,255,.7);font-size:10px;font-weight:600;padding:5px 12px;border-radius:100px;backdrop-filter:blur(8px);z-index:10;letter-spacing:.04em;pointer-events:none;opacity:0;transition:opacity .25s ease}
+.mockup-display-wrapper:hover::before{opacity:1}
+/* Mockup inner container — kunci proporsional */
+.mockup-display{width:100%;display:block}
+.mockup-hint{text-align:center;font-size:10px;color:var(--text3);margin-top:8px;letter-spacing:.04em}
+.mockup-dl-bar{display:flex;gap:10px;margin-top:14px}
+.dl-btn{flex:1;padding:12px;border-radius:100px;font-family:var(--font-body);font-size:12px;font-weight:600;cursor:pointer;border:none;transition:var(--transition);letter-spacing:.02em}
+.dl-btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 4px 18px rgba(124,92,252,.4)}
+.dl-btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(124,92,252,.55)}
+.dl-btn-ghost{background:var(--surface);color:var(--text2);border:1.5px solid var(--border)}
+.dl-btn-ghost:hover{background:var(--surface2);color:var(--text);border-color:var(--border-hover)}
+/* Skeleton loading */
+.mockup-skeleton{background:var(--surface);border-radius:24px;overflow:hidden}
+.skeleton-inner{height:320px;background:linear-gradient(90deg,var(--surface) 25%,var(--surface2) 50%,var(--surface) 75%);background-size:800px 100%;animation:shimmer 1.4s ease infinite}
+.palette-gen-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;margin-top:14px}
+.pgs-title{font-size:10px;font-weight:700;color:var(--text2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em}
+.pgs-chips{display:flex;gap:6px}
+.pgc{flex:1;height:36px;border-radius:8px;cursor:pointer;transition:var(--transition);border:2px solid transparent;position:relative}
+.pgc:hover{transform:scale(1.08)}.pgc.active{border-color:var(--text);box-shadow:0 0 0 3px rgba(255,255,255,.12)}
+.font-rec-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;margin-top:12px}
+.fr-title{font-size:10px;font-weight:700;color:var(--text2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em}
+.fr-pairs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.fr-pair{border:1.5px solid var(--border);border-radius:10px;padding:11px;cursor:pointer;transition:var(--transition)}
 .fr-pair:hover{border-color:var(--border-hover);background:var(--surface2)}
-.fr-pair.active{border-color:var(--accent);background:rgba(124,92,252,.08)}
-.fr-name{font-size:12px;font-weight:700;color:var(--text)}.fr-sub{font-size:10px;color:var(--text2);margin-top:1px}
+.fr-pair.active{border-color:var(--accent);background:rgba(124,92,252,.08);box-shadow:0 0 0 3px rgba(124,92,252,.1)}
+.fr-name{font-size:13px;font-weight:700;color:var(--text)}.fr-sub{font-size:10px;color:var(--text2);margin-top:2px}
 
 /* STEP 6 - SOCIAL MEDIA */
-.social-tabs{display:flex;gap:5px;margin-bottom:14px;overflow-x:auto;scrollbar-width:none}
+.social-tabs{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;scrollbar-width:none}
 .social-tabs::-webkit-scrollbar{display:none}
-.social-tab{padding:6px 12px;border-radius:100px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--text2);white-space:nowrap;transition:var(--transition);flex-shrink:0;display:flex;align-items:center;gap:5px}
-.social-tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.social-tab{padding:7px 14px;border-radius:100px;font-size:11px;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:var(--surface);color:var(--text2);white-space:nowrap;transition:var(--transition);flex-shrink:0;display:flex;align-items:center;gap:5px}
+.social-tab.active{background:linear-gradient(90deg,var(--accent),var(--accent2));border-color:transparent;color:#fff;box-shadow:0 4px 14px rgba(124,92,252,.3)}
 .social-frame{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:10px}
 .social-frame-header{padding:9px 12px;display:flex;align-items:center;gap:7px;border-bottom:1px solid var(--border);font-size:11px;color:var(--text2)}
 .social-frame-dot{width:7px;height:7px;border-radius:50%}
+
+/* MODAL FULLSCREEN — TRUE FULLSCREEN */
+.mkp-modal{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9500;display:none;align-items:center;justify-content:center;backdrop-filter:blur(16px)}
+.mkp-modal.show{display:flex;animation:fadeIn .3s ease}
+.mkp-modal-inner{background:var(--bg2);border-radius:24px;padding:24px;width:calc(100% - 32px);max-width:500px;box-shadow:0 40px 100px rgba(0,0,0,.7);max-height:90vh;overflow-y:auto;border:1px solid var(--border)}
+.mkp-modal-title{font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--text)}
+.mkp-modal-close{background:var(--surface);border:1.5px solid var(--border);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;transition:var(--transition);color:var(--text2)}
+.mkp-modal-close:hover{background:var(--surface2);border-color:var(--border-hover)}
+/* Mockup image dalam modal — full dan proporsional */
+.mkp-modal-content-wrap{border-radius:16px;overflow:hidden;border:1px solid var(--border)}
 
 /* STEP 7 - EXPORT */
 .export-formats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
@@ -498,17 +521,20 @@ input[type="color"]{width:46px;height:46px;border:none;border-radius:var(--radiu
   <p class="loading-sub" id="loading-sub"></p>
 </div>
 
-<!-- MOCKUP MODAL -->
+<!-- MOCKUP MODAL FULLSCREEN —— REFACTORED -->
 <div class="mkp-modal" id="mkp-modal" onclick="if(event.target===this)closeMkpModal()">
   <div class="mkp-modal-inner">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-      <span class="mkp-modal-title" id="mkp-modal-title">Mockup Preview</span>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+      <div>
+        <div class="mkp-modal-title" id="mkp-modal-title">Mockup Preview</div>
+        <div style="font-size:10px;color:var(--text3);margin-top:2px" id="mkp-modal-sub">Tap di luar untuk tutup</div>
+      </div>
       <button class="mkp-modal-close" onclick="closeMkpModal()">✕</button>
     </div>
-    <div id="mkp-modal-content"></div>
-    <div style="display:flex;gap:8px;margin-top:14px">
-      <button class="dl-btn dl-btn-ghost" style="flex:1" onclick="closeMkpModal()">Tutup</button>
-      <button class="dl-btn dl-btn-primary" style="flex:1" onclick="downloadMockup()">⬇ Download</button>
+    <div class="mkp-modal-content-wrap" id="mkp-modal-content"></div>
+    <div style="display:flex;gap:10px;margin-top:18px">
+      <button class="dl-btn dl-btn-ghost" style="flex:1" onclick="closeMkpModal()">✕ Tutup</button>
+      <button class="dl-btn dl-btn-primary" style="flex:1" id="dl-btn-modal" onclick="downloadMockupCanvas()">⬇ Download HD</button>
     </div>
   </div>
 </div>
@@ -840,21 +866,37 @@ input[type="color"]{width:46px;height:46px;border:none;border-radius:var(--radiu
     </div>
   </div>
 
-  <!-- STEP 5: MOCKUP PREVIEW -->
+  <!-- STEP 5: MOCKUP PREVIEW — REFACTORED -->
   <div class="builder-step" id="step-5">
     <h2 class="step-title">Mockup Preview</h2>
     <p class="step-subtitle" id="step5-subtitle">Preview brand kamu di berbagai media</p>
-    <div class="mockup-sync-bar"><div class="sync-dot"></div><span class="sync-text" id="sync-text">Tersinkron dengan logo terpilih</span></div>
-    <div class="mockup-tabs" id="mockup-tabs"></div>
-    <div class="mockup-display" id="mockup-display" onclick="openMockupFull()"></div>
-    <div class="mockup-hint">Tap untuk fullscreen</div>
-    <div class="mockup-dl-bar">
-      <button class="dl-btn dl-btn-ghost" onclick="openMockupFull()">🔍 Perbesar</button>
-      <button class="dl-btn dl-btn-primary" onclick="downloadMockup()">⬇ Download</button>
+    <!-- Sync bar -->
+    <div class="mockup-sync-bar">
+      <div class="sync-dot"></div>
+      <span class="sync-text" id="sync-text">Tersinkron dengan logo terpilih</span>
     </div>
-    <div class="palette-gen-section"><div class="pgs-title">🎨 Palet Warna</div><div class="pgs-chips" id="pgs-chips"></div></div>
-    <div class="font-rec-section"><div class="fr-title">🔤 Rekomendasi Font</div><div class="fr-pairs" id="fr-pairs"></div></div>
-    <div class="step-nav" style="margin-top:16px">
+    <!-- Tab scrollable -->
+    <div class="mockup-tabs" id="mockup-tabs"></div>
+    <!-- Preview card premium -->
+    <div class="mockup-display-wrapper" id="mockup-display-wrapper" onclick="openMockupFull()">
+      <div id="mockup-display" class="mockup-display"></div>
+    </div>
+    <!-- Action bar -->
+    <div class="mockup-dl-bar">
+      <button class="dl-btn dl-btn-ghost" onclick="openMockupFull()">🔍 Fullscreen</button>
+      <button class="dl-btn dl-btn-primary" id="dl-btn-main" onclick="downloadMockup()">⬇ Download PNG</button>
+    </div>
+    <!-- Palet warna -->
+    <div class="palette-gen-section">
+      <div class="pgs-title">🎨 Palet Warna Brand</div>
+      <div class="pgs-chips" id="pgs-chips"></div>
+    </div>
+    <!-- Font pairs -->
+    <div class="font-rec-section">
+      <div class="fr-title">🔤 Rekomendasi Font Pairing</div>
+      <div class="fr-pairs" id="fr-pairs"></div>
+    </div>
+    <div class="step-nav" style="margin-top:18px">
       <button class="btn btn-ghost" onclick="prevStep()">← Kembali</button>
       <button class="btn btn-primary" onclick="nextStep()">Social Media →</button>
     </div>
@@ -1468,7 +1510,7 @@ function buildLogoSVG(style,name,c1,c2,c3){
 }
 function initLogoStudio(){
   if(!bState.accentColor)bState.accentColor=bState.colors.primary;
-  const logoName=document.getElementById('logo -name-input').value||bState.name||'Brand';
+  const logoName=document.getElementById('logo-name-input').value||bState.name||'Brand'; // BUG FIX: typo 'logo -name-input'
   bState.name=bState.name||logoName;
   renderLogoGrid();renderAccentSwatches();
   applyLogoToAll(bState.logoVariant);
@@ -1534,311 +1576,367 @@ function handleLogoUpload(event){
 }
 
 // ================================================================
-// MOCKUP
+// MOCKUP — REFACTORED dengan LOGO_SCALE System
 // ================================================================
+
+// === AUTO SCALE SYSTEM ===
+// Scale relatif terhadap lebar container mockup.
+// 1.0 = penuh, 0.5 = setengah, dst.
+const LOGO_SCALE = {
+  card:     0.90,   // Kartu nama — medium
+  makanan:  0.70,   // Produk makanan — lebih kecil (overlay bawah)
+  kaos:     0.100,   // Botol — sedang (label stiker)
+  paperbag: 0.110,   // Paper bag — sedikit lebih besar
+  box:      0.80,   // Packaging — di dalam lingkaran, agak kecil
+  web:      0.55,   // Website navbar — kecil agar proporsional
+};
+
+// Tinggi aspek ratio per mockup agar tidak terpotong
+const MOCKUP_HEIGHT = {
+  card:     '300px',
+  makanan:  '320px',
+  kaos:     '340px',
+  paperbag: '310px',
+  box:      '300px',
+  web:      '280px',
+};
+
 function initMockupStep(){
   activeMockupTab=0;
   document.getElementById('step5-subtitle').textContent='Preview brand kamu di berbagai media';
   const tabBar=document.getElementById('mockup-tabs');tabBar.innerHTML='';
   MOCKUP_TYPES.forEach((item,i)=>{
     const tab=document.createElement('div');tab.className='mkp-tab'+(i===0?' active':'');tab.textContent=item.label;
-    tab.onclick=()=>{activeMockupTab=i;document.querySelectorAll('.mkp-tab').forEach(t=>t.classList.remove('active'));tab.classList.add('active');renderMockupDisplay()};
+    tab.onclick=()=>{
+      activeMockupTab=i;
+      document.querySelectorAll('.mkp-tab').forEach(t=>t.classList.remove('active'));
+      tab.classList.add('active');
+      showMockupSkeleton();
+      setTimeout(()=>renderMockupDisplay(), 350); // smooth transition delay
+    };
     tabBar.appendChild(tab);
   });
   renderPaletteChips();renderFontPairs();
-  const sync=document.getElementById('sync-text');if(sync)sync.textContent=`Logo variasi ${bState.logoVariant+1} diterapkan`;
-  renderMockupDisplay();
+  const sync=document.getElementById('sync-text');
+  if(sync)sync.textContent=`Logo variasi ${bState.logoVariant+1} diterapkan ke semua mockup`;
+  showMockupSkeleton();
+  setTimeout(()=>renderMockupDisplay(), 400);
 }
+
+function showMockupSkeleton(){
+  const display=document.getElementById('mockup-display');
+  if(!display)return;
+  const tabKey=MOCKUP_TYPES[activeMockupTab]?.key||'card';
+  const h=MOCKUP_HEIGHT[tabKey]||'300px';
+  display.innerHTML=`<div class="skeleton-inner" style="height:${h};border-radius:20px"></div>`;
+}
+
 function renderMockupDisplay(){
   const display=document.getElementById('mockup-display');if(!display)return;
-  const tabKey=MOCKUP_TYPES[activeMockupTab]?.key||'feed';
-  display.innerHTML=renderMockupHTML(tabKey,bState.selectedLogoHTML||bState.logoSVG);
+  const tabKey=MOCKUP_TYPES[activeMockupTab]?.key||'card';
+  const logoHTML=bState.selectedLogoHTML||bState.logoSVG;
+  display.innerHTML=renderMockupHTML(tabKey, logoHTML);
+  // Update tinggi wrapper agar proporsional
+  const wrapper=document.getElementById('mockup-display-wrapper');
+  if(wrapper)wrapper.style.minHeight=MOCKUP_HEIGHT[tabKey]||'300px';
 }
+// ================================================================
+// renderMockupHTML — REFACTORED
+// Sistem baru: logo ukurannya dikontrol via LOGO_SCALE per mockup
+// Gambar mockup: object-fit:contain (tidak terpotong)
+// Setiap mockup punya tinggi konsisten via MOCKUP_HEIGHT
+// ================================================================
 function renderMockupHTML(tabKey, logoHTML) {
-  const name    = bState.name || 'Brand Name';
-  const c1      = bState.colors.primary    || '#7C5CFC';
-  const c2      = bState.colors.secondary  || '#FC5C7D';
-  const c3      = bState.colors.dark       || '#1A0050';
-  const slogan  = bState.slogan || 'Your Brand Story';
-  const ini     = getInitials(name);
-  const sn      = shortN(name);
- 
-  // Watermark untuk free user
-  const wm = (!currentUser || currentUser.status === 'free')
-    ? `<div style="position:absolute;bottom:8px;right:10px;font-size:9px;
-                   color:rgba(255,255,255,0.35);z-index:20;letter-spacing:.08em;
-                   font-weight:600;pointer-events:none">BBK</div>`
+  const name   = bState.name || 'Brand Name';
+  const c1     = bState.colors.primary   || '#7C5CFC';
+  const c2     = bState.colors.secondary || '#FC5C7D';
+  const c3     = bState.colors.dark      || '#1A0050';
+  const slogan = bState.slogan || 'Your Brand Story';
+  const ini    = getInitials(name);
+  const sn     = shortN(name);
+  const h      = MOCKUP_HEIGHT[tabKey] || '300px';
+
+  // === WATERMARK (free user) ===
+  const wm = (!currentUser || currentUser.status==='free')
+    ? `<div style="position:absolute;bottom:10px;right:12px;font-size:9px;
+                  color:rgba(255,255,255,0.4);z-index:20;letter-spacing:.1em;
+                  font-weight:700;pointer-events:none;background:rgba(0,0,0,.25);
+                  padding:3px 8px;border-radius:6px">BBK</div>`
     : '';
- 
-  // ── Blok logo + nama brand (dipakai di semua mockup) ──────────
-  const logoBlock = `
-    <div style="display:flex;flex-direction:column;align-items:center;
-                justify-content:center;gap:4px;text-align:center;">
-      ${logoHTML
-        ? `<div style="transform:scale(0.5);transform-origin:center;
-                       filter:drop-shadow(0 4px 12px rgba(0,0,0,0.55));
-                       margin-bottom:-10px;margin-top:-10px">${logoHTML}</div>`
-        : `<div style="width:44px;height:44px;border-radius:12px;background:${c1};
-                       display:flex;align-items:center;justify-content:center;
-                       font-size:16px;font-weight:800;color:#fff;
-                       box-shadow:0 4px 16px rgba(0,0,0,0.4)">${ini}</div>`
-      }
-      <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:800;
-                  color:#fff;letter-spacing:.06em;
-                  text-shadow:0 2px 10px rgba(0,0,0,0.7);line-height:1.2;">
-        ${sn.toUpperCase()}
-      </div>
-    </div>`;
- 
-  // ── Blok logo + nama untuk overlay bawah (feed/makanan) ───────
-  const logoBarLeft = `
-    <div style="display:flex;align-items:center;gap:6px;">
-      ${logoHTML
-        ? `<div style="transform:scale(0.38);transform-origin:left center;
-                       flex-shrink:0;width:40px;margin-right:-18px;">${logoHTML}</div>`
-        : `<div style="width:28px;height:28px;border-radius:7px;background:${c1};
-                       display:flex;align-items:center;justify-content:center;
-                       font-size:10px;font-weight:800;color:#fff;flex-shrink:0">${ini}</div>`
-      }
-      <div>
-        <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:800;
-                    color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.5)">
+
+  // === LOGO BLOCK BUILDER — auto-scale via LOGO_SCALE ===
+  // Kita render SVG logo dalam container berukuran tetap 64x64
+  // lalu scale wrapper-nya berdasarkan LOGO_SCALE[tabKey]
+  function buildLogoBlock(scale, withName=true, nameColor='#fff') {
+    const size = scale;
+    const logoEl = logoHTML
+      ? `<div style="width:${size}px;height:${size}px;display:flex;align-items:center;
+                    justify-content:center;overflow:hidden;flex-shrink:0;
+                    filter:drop-shadow(0 4px 14px rgba(0,0,0,.5))">${logoHTML}</div>`
+      : `<div style="width:56px;height:56px;border-radius:14px;background:${c1};
+                    display:flex;align-items:center;justify-content:center;
+                    font-size:20px;font-weight:800;color:#fff;
+                    box-shadow:0 6px 20px rgba(0,0,0,.45);flex-shrink:0">${ini}</div>`;
+    const nameEl = withName
+      ? `<div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:800;
+                    color:${nameColor};letter-spacing:.06em;
+                    text-shadow:0 2px 8px rgba(0,0,0,.6);line-height:1.2;margin-top:4px">
           ${sn.toUpperCase()}
-        </div>
-        <div style="font-size:9px;color:rgba(255,255,255,0.6);font-style:italic;margin-top:1px">
-          ${slogan.substring(0, 22)}
-        </div>
-      </div>
-    </div>`;
- 
-  // ── Shared wrapper style ──────────────────────────────────────
-  const wrapStyle = `position:relative;min-height:200px;overflow:hidden;border-radius:12px;`;
-  const overlayDark = `position:absolute;inset:0;z-index:1;`;
- 
-  // ─────────────────────────────────────────────────────────────
-  // 🪪 KARTU NAMA — mockup-kartunama.jpeg
-  // ─────────────────────────────────────────────────────────────
+        </div>`
+      : '';
+    return `<div style="
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:4px;
+text-align:center;
+width:${size}px;
+max-width:100%;
+margin:auto;
+">
+              ${logoEl}
+              ${nameEl}
+            </div>`;
+  }
+
+  // Logo bar horizontal kiri (untuk overlay bawah)
+  function buildLogoBarLeft(scale) {
+    const logoEl = logoHTML
+      ? `<div style="width:40px;height:40px;display:flex;align-items:center;
+                    justify-content:center;overflow:hidden;flex-shrink:0;
+                    transform:scale(${scale});transform-origin:left center;">${logoHTML}</div>`
+      : `<div style="width:28px;height:28px;border-radius:8px;background:${c1};
+                    display:flex;align-items:center;justify-content:center;
+                    font-size:10px;font-weight:800;color:#fff;flex-shrink:0">${ini}</div>`;
+    return `<div style="display:flex;align-items:center;gap:8px;">
+              ${logoEl}
+              <div>
+                <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:800;
+                            color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.5)">
+                  ${sn.toUpperCase()}
+                </div>
+                <div style="font-size:9px;color:rgba(255,255,255,.65);font-style:italic;margin-top:1px">
+                  ${slogan.substring(0,24)}
+                </div>
+              </div>
+            </div>`;
+  }
+
+  // Shared: wrapper dengan tinggi konsisten + image object-fit:contain
+  const imgStyle = `width:100%;height:${h};object-fit:contain;display:block;background:#0d0d0d;`;
+  const imgStyleLight = `width:100%;height:${h};object-fit:contain;display:block;background:#f5f0e8;`;
+  const wrapStyle = `position:relative;overflow:hidden;border-radius:20px;
+                     min-height:${h};background:#0d0d0d;`;
+  const overlay = (grad) => `<div style="position:absolute;inset:0;z-index:1;${grad}"></div>`;
+
+  // ──────────────────────────────────────────────────────────────
+  // 🪪 KARTU NAMA
+  // ──────────────────────────────────────────────────────────────
   if (tabKey === 'card') {
     return `
-      <div style="${wrapStyle}">
-        <img src="./icons/mockup-kartunama.jpeg"
-          style="width:100%;height:100%;object-fit:cover;display:block;min-height:200px;"
-          onerror="this.style.display='none';this.parentElement.style.background=
-                   'linear-gradient(135deg,${c1},${c2})'">
-        <div style="${overlayDark}
-          background:linear-gradient(135deg,rgba(0,0,0,0.42),rgba(0,0,0,0.2))"></div>
- 
-        <!-- Kartu bisnis di tengah -->
-        <div style="position:absolute;inset:0;z-index:5;
-                    display:flex;align-items:center;justify-content:center;">
-          <div style="
-            background:linear-gradient(135deg,${c1}ee,${c2}cc);
-            border-radius:16px;padding:18px 24px;
-            box-shadow:0 14px 44px rgba(0,0,0,0.55);
-            border:1px solid rgba(255,255,255,0.15);
-            min-width:190px;text-align:center;
-            backdrop-filter:blur(6px);
-          ">
-            ${logoBlock}
-            <div style="width:100%;height:1px;background:rgba(255,255,255,0.2);margin:10px 0;"></div>
-            <div style="font-size:9px;color:rgba(255,255,255,0.65);
-                        letter-spacing:.1em;font-style:italic;">
-              "${slogan.substring(0, 26)}"
-            </div>
+    <div style="${wrapStyle}">
+      <img src="./icons/mockup-kartunama.jpeg"
+        style="${imgStyle}"
+        onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,${c1},${c2})'">
+      ${overlay('background:linear-gradient(135deg,rgba(0,0,0,.38),rgba(0,0,0,.15))')}
+      <!-- Business card center -->
+      <div style="position:absolute;inset:0;z-index:5;
+                  display:flex;align-items:center;justify-content:center;">
+        <div style="background:linear-gradient(135deg,${c1}ee,${c3}cc);
+                    border-radius:20px;padding:22px 28px;
+                    box-shadow:0 20px 60px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.12);
+                    min-width:200px;text-align:center;
+                    backdrop-filter:blur(12px);
+                    animation:slideUp .4s ease;">
+          ${buildLogoBlock(LOGO_SCALE.card, true)}
+          <div style="width:100%;height:1px;background:rgba(255,255,255,.2);margin:12px 0;"></div>
+          <div style="font-size:9px;color:rgba(255,255,255,.6);
+                      letter-spacing:.12em;font-style:italic;">
+            "${slogan.substring(0,28)}"
           </div>
         </div>
-        ${wm}
-      </div>`;
+      </div>
+      ${wm}
+    </div>`;
   }
- 
-  // ─────────────────────────────────────────────────────────────
-  // 🍱 PRODUK MAKANAN — mockup-makanan.jpeg
-  // ─────────────────────────────────────────────────────────────
+
+  // ──────────────────────────────────────────────────────────────
+  // 🍱 PRODUK MAKANAN
+  // ──────────────────────────────────────────────────────────────
   if (tabKey === 'makanan') {
     return `
-      <div style="${wrapStyle}">
-        <img src="./icons/mockup-makanan.jpeg"
-          style="width:100%;height:100%;object-fit:cover;display:block;min-height:200px;"
-          onerror="this.style.display='none';this.parentElement.style.background=
-                   'linear-gradient(135deg,${c1},${c2})'">
-        <div style="${overlayDark}
-          background:linear-gradient(180deg,rgba(0,0,0,0.05) 40%,rgba(0,0,0,0.65))"></div>
- 
-        <!-- Header IG style -->
-        <div style="position:absolute;top:10px;left:12px;right:12px;z-index:5;
-                    display:flex;align-items:center;gap:8px;">
-          <div style="width:26px;height:26px;border-radius:50%;
-                      background:linear-gradient(135deg,${c1},${c2});
-                      display:flex;align-items:center;justify-content:center;
-                      font-size:9px;font-weight:800;color:#fff;
-                      border:1.5px solid rgba(255,255,255,0.5);">${ini}</div>
-          <div style="font-size:10px;font-weight:600;color:#fff;
-                      text-shadow:0 1px 4px rgba(0,0,0,0.5);">
-            ${sn.toLowerCase().replace(/\s+/g,'_')}
-          </div>
+    <div style="${wrapStyle}">
+      <img src="./icons/mockup-makanan.jpeg"
+        style="${imgStyle}"
+        onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,${c1},${c2})'">
+      ${overlay('background:linear-gradient(180deg,rgba(0,0,0,.05) 40%,rgba(0,0,0,.7))')}
+      <!-- IG-style header -->
+      <div style="position:absolute;top:12px;left:14px;right:14px;z-index:5;
+                  display:flex;align-items:center;gap:8px;">
+        <div style="width:30px;height:30px;border-radius:50%;
+                    background:linear-gradient(135deg,${c1},${c2});
+                    display:flex;align-items:center;justify-content:center;
+                    font-size:10px;font-weight:800;color:#fff;
+                    border:2px solid rgba(255,255,255,.5);">${ini}</div>
+        <div style="font-size:11px;font-weight:600;color:#fff;
+                    text-shadow:0 1px 4px rgba(0,0,0,.5);">
+          ${sn.toLowerCase().replace(/\s+/g,'_')}
         </div>
- 
-        <!-- Overlay bawah -->
-        <div style="position:absolute;bottom:0;left:0;right:0;z-index:5;
-                    padding:12px 14px;
-                    background:linear-gradient(0deg,rgba(0,0,0,0.72),transparent);">
-          ${logoBarLeft}
-        </div>
-        ${wm}
-      </div>`;
+      </div>
+      <!-- Logo overlay bawah -->
+      <div style="position:absolute;bottom:0;left:0;right:0;z-index:5;
+                  padding:14px 16px;
+                  background:linear-gradient(0deg,rgba(0,0,0,.75),transparent);">
+        ${buildLogoBarLeft(LOGO_SCALE.makanan)}
+      </div>
+      ${wm}
+    </div>`;
   }
- 
-  // ─────────────────────────────────────────────────────────────
-  // 🍶 BOTOL — mockup-botol.jpeg
-  // ─────────────────────────────────────────────────────────────
+
+  // ──────────────────────────────────────────────────────────────
+  // 🍶 BOTOL
+  // ──────────────────────────────────────────────────────────────
   if (tabKey === 'kaos') {
     return `
-      <div style="${wrapStyle}">
-        <img src="./icons/mockup-botol.jpeg"
-          style="width:100%;height:100%;object-fit:cover;display:block;min-height:210px;"
-          onerror="this.style.display='none';this.parentElement.style.background=
-                   'linear-gradient(135deg,#111,#1a1a2e)'">
-        <div style="${overlayDark}
-          background:linear-gradient(180deg,rgba(0,0,0,0.08),rgba(0,0,0,0.5))"></div>
- 
-        <!-- Label stiker botol di tengah -->
-        <div style="position:absolute;top:50%;left:50%;
-                    transform:translate(-50%,-56%);z-index:5;">
-          <div style="
-            background:linear-gradient(145deg,${c1}f2,${c3}f2);
-            border-radius:12px;padding:12px 18px;
-            box-shadow:0 10px 36px rgba(0,0,0,0.6);
-            border:1px solid rgba(255,255,255,0.14);
-            text-align:center;min-width:88px;
-            backdrop-filter:blur(8px);
-          ">
-            ${logoBlock}
-          </div>
+    <div style="${wrapStyle}">
+      <img src="./icons/mockup-botol.jpeg"
+        style="${imgStyle}"
+        onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#111,#1a1a2e)'">
+      ${overlay('background:linear-gradient(180deg,rgba(0,0,0,.06),rgba(0,0,0,.45))')}
+      <!-- Label stiker botol -->
+      <div style="position:absolute;top:50%;left:50%;
+                  transform:translate(-50%,-55%);z-index:5;">
+        <div style="background:linear-gradient(145deg,${c1}f2,${c3}f0);
+                    border-radius:14px;padding:14px 20px;
+                    box-shadow:0 14px 44px rgba(0,0,0,.65);
+                    border:1px solid rgba(255,255,255,.15);
+                    text-align:center;min-width:96px;
+                    backdrop-filter:blur(10px);">
+          ${buildLogoBlock(LOGO_SCALE.kaos, true)}
         </div>
-        ${wm}
-      </div>`;
+      </div>
+      ${wm}
+    </div>`;
   }
- 
-  // ─────────────────────────────────────────────────────────────
-  // 🛍️ PAPER BAG — mockup-paperbag.jpeg
-  // ─────────────────────────────────────────────────────────────
+
+  // ──────────────────────────────────────────────────────────────
+  // 🛍️ PAPER BAG
+  // ──────────────────────────────────────────────────────────────
   if (tabKey === 'paperbag') {
     return `
-      <div style="${wrapStyle}">
-        <img src="./icons/mockup-paperbag.jpeg"
-          style="width:100%;height:100%;object-fit:cover;display:block;min-height:200px;"
-          onerror="this.style.display='none';this.parentElement.style.background=
-                   'linear-gradient(135deg,#f5f0e8,#ede5d8)'">
-        <div style="${overlayDark}background:rgba(0,0,0,0.12)"></div>
- 
-        <!-- Stiker di paper bag -->
-        <div style="position:absolute;top:50%;left:50%;
-                    transform:translate(-50%,-54%);z-index:5;">
-          <div style="
-            background:linear-gradient(145deg,${c1}f5,${c3}e5);
-            border-radius:14px;padding:13px 20px;
-            box-shadow:0 10px 32px rgba(0,0,0,0.45);
-            border:1px solid rgba(255,255,255,0.16);
-            text-align:center;
-            backdrop-filter:blur(6px);
-          ">
-            ${logoBlock}
-          </div>
+    <div style="${wrapStyle};background:#f5f0e8;">
+      <img src="./icons/mockup-paperbag.jpeg"
+        style="${imgStyleLight}"
+        onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#f5f0e8,#ede5d8)'">
+      ${overlay('background:rgba(0,0,0,.1)')}
+      <!-- Stiker di paper bag -->
+      <div style="position:absolute;top:50%;left:50%;
+                  transform:translate(-50%,-54%);z-index:5;">
+        <div style="background:linear-gradient(145deg,${c1}f5,${c3}e8);
+                    border-radius:16px;padding:15px 22px;
+                    box-shadow:0 12px 40px rgba(0,0,0,.45);
+                    border:1px solid rgba(255,255,255,.18);
+                    text-align:center;
+                    backdrop-filter:blur(8px);">
+          ${buildLogoBlock(LOGO_SCALE.paperbag, true)}
         </div>
-        ${wm}
-      </div>`;
+      </div>
+      ${wm}
+    </div>`;
   }
- 
-  // ─────────────────────────────────────────────────────────────
-  // 📦 PACKAGING / BOX — mockup-packaging.jpeg
-  // ─────────────────────────────────────────────────────────────
+
+  // ──────────────────────────────────────────────────────────────
+  // 📦 PACKAGING / BOX
+  // ──────────────────────────────────────────────────────────────
   if (tabKey === 'box') {
     return `
-      <div style="${wrapStyle}">
-        <img src="./icons/mockup-packaging.jpeg"
-          style="width:100%;height:100%;object-fit:cover;display:block;min-height:200px;"
-          onerror="this.style.display='none';this.parentElement.style.background=
-                   'linear-gradient(135deg,${c1},${c3})'">
-        <div style="${overlayDark}
-          background:linear-gradient(135deg,rgba(0,0,0,0.32),rgba(0,0,0,0.12))"></div>
- 
-        <!-- Stiker bulat di packaging -->
-        <div style="position:absolute;top:50%;left:50%;
-                    transform:translate(-50%,-50%);z-index:5;">
-          <div style="
-            background:linear-gradient(135deg,${c1}f5,${c2}d5);
-            border-radius:50%;width:108px;height:108px;
-            display:flex;align-items:center;justify-content:center;
-            box-shadow:0 12px 44px rgba(0,0,0,0.55);
-            border:2.5px solid rgba(255,255,255,0.22);
-          ">
-            ${logoBlock}
-          </div>
+    <div style="${wrapStyle}">
+      <img src="./icons/mockup-packaging.jpeg"
+        style="${imgStyle}"
+        onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,${c1},${c3})'">
+      ${overlay('background:linear-gradient(135deg,rgba(0,0,0,.3),rgba(0,0,0,.1))')}
+      <!-- Stiker bulat di box -->
+      <div style="position:absolute;top:50%;left:50%;
+                  transform:translate(-50%,-50%);z-index:5;">
+        <div style="background:linear-gradient(135deg,${c1}f5,${c2}d5);
+                    border-radius:50%;width:120px;height:120px;
+                    display:flex;align-items:center;justify-content:center;
+                    box-shadow:0 16px 50px rgba(0,0,0,.6);
+                    border:3px solid rgba(255,255,255,.22);">
+          ${buildLogoBlock(LOGO_SCALE.box, false)}
         </div>
-        ${wm}
-      </div>`;
+      </div>
+      ${wm}
+    </div>`;
   }
- 
-  // ─────────────────────────────────────────────────────────────
-  // 🌐 WEBSITE — tetap CSS (tidak ada JPEG-nya)
-  // ─────────────────────────────────────────────────────────────
+
+  // ──────────────────────────────────────────────────────────────
+  // 🌐 WEBSITE
+  // ──────────────────────────────────────────────────────────────
   if (tabKey === 'web') {
+    const navLogoScale = LOGO_SCALE.web;
+    const navLogoEl = logoHTML
+      ? `<div style="width:36px;height:36px;display:flex;align-items:center;
+                    justify-content:center;overflow:hidden;flex-shrink:0;
+                    transform:scale(${navLogoScale * 2});transform-origin:left center;
+                    margin-right:-${Math.round(36*(1-navLogoScale*2)*0.5)}px">${logoHTML}</div>`
+      : `<div style="width:32px;height:32px;border-radius:8px;
+                    background:rgba(255,255,255,.2);
+                    display:flex;align-items:center;justify-content:center;
+                    font-size:11px;font-weight:800;color:#fff">${ini}</div>`;
     return `
-      <div style="background:#0a0a1a;padding:14px;min-height:200px;
-                  position:relative;border-radius:12px;">
-        <div style="background:#111;border-radius:10px;overflow:hidden;
-                    box-shadow:0 0 40px rgba(124,92,252,.2)">
-          <div style="background:#1a1a2e;padding:7px 10px;display:flex;
-                      align-items:center;gap:7px;
-                      border-bottom:1px solid rgba(255,255,255,.07)">
-            <div style="display:flex;gap:4px">
-              ${['#ff5f56','#ffbd2e','#27c93f'].map(c =>
-                `<div style="width:7px;height:7px;border-radius:50%;background:${c}"></div>`
-              ).join('')}
-            </div>
-            <div style="flex:1;background:rgba(255,255,255,.06);border-radius:4px;
-                        height:14px;display:flex;align-items:center;padding:0 8px;
-                        font-size:7px;color:rgba(255,255,255,.3)">
-              www.${sn.toLowerCase().replace(/\s+/g,'')}.com
-            </div>
+    <div style="background:#0a0a1a;padding:16px;border-radius:20px;
+                min-height:${h};position:relative;">
+      <div style="background:#111;border-radius:12px;overflow:hidden;
+                  box-shadow:0 0 50px rgba(124,92,252,.2);border:1px solid rgba(255,255,255,.05);">
+        <!-- Browser bar -->
+        <div style="background:#1a1a2e;padding:8px 12px;display:flex;
+                    align-items:center;gap:8px;
+                    border-bottom:1px solid rgba(255,255,255,.07);">
+          <div style="display:flex;gap:5px">
+            ${['#ff5f56','#ffbd2e','#27c93f'].map(c=>`<div style="width:8px;height:8px;border-radius:50%;background:${c}"></div>`).join('')}
           </div>
-          <div style="background:linear-gradient(135deg,${c1},${c2});
-                      padding:18px;display:flex;align-items:center;gap:8px;">
-            ${logoHTML
-              ? `<div style="transform:scale(0.38);transform-origin:left center;
-                             flex-shrink:0;margin-right:-24px;">${logoHTML}</div>`
-              : `<div style="width:32px;height:32px;border-radius:8px;
-                             background:rgba(255,255,255,.2);display:flex;
-                             align-items:center;justify-content:center;
-                             font-size:11px;font-weight:800;color:#fff">${ini}</div>`
-            }
-            <div>
-              <div style="font-size:12px;font-weight:700;color:#fff;">${sn}</div>
-              <div style="font-size:8px;color:rgba(255,255,255,.65);">
-                ${bState.category || 'Brand'}
-              </div>
-            </div>
-          </div>
-          <div style="padding:10px">
-            <div style="height:5px;border-radius:100px;background:rgba(255,255,255,.1);
-                        width:80%;margin-bottom:4px;"></div>
-            <div style="height:5px;border-radius:100px;background:rgba(255,255,255,.06);
-                        width:60%;margin-bottom:8px;"></div>
-            <div style="background:${c1};color:#fff;border-radius:100px;
-                        padding:5px 12px;font-size:8px;font-weight:700;display:inline-block;">
-              Hubungi Kami →
-            </div>
+          <div style="flex:1;background:rgba(255,255,255,.07);border-radius:6px;
+                      height:16px;display:flex;align-items:center;padding:0 10px;
+                      font-size:8px;color:rgba(255,255,255,.35);">
+            🔒 www.${sn.toLowerCase().replace(/\s+/g,'')}.com
           </div>
         </div>
-        ${wm}
-      </div>`;
+        <!-- Navbar -->
+        <div style="background:linear-gradient(135deg,${c1},${c3});
+                    padding:12px 16px;display:flex;align-items:center;gap:8px;">
+          ${navLogoEl}
+          <div>
+            <div style="font-size:13px;font-weight:700;color:#fff;">${sn}</div>
+            <div style="font-size:8px;color:rgba(255,255,255,.65);">${bState.category||'Brand'}</div>
+          </div>
+          <div style="margin-left:auto;display:flex;gap:8px;">
+            <div style="font-size:8px;color:rgba(255,255,255,.6);font-weight:500;">Beranda</div>
+            <div style="font-size:8px;color:rgba(255,255,255,.6);font-weight:500;">Produk</div>
+            <div style="font-size:8px;color:rgba(255,255,255,.6);font-weight:500;">Kontak</div>
+          </div>
+        </div>
+        <!-- Hero section -->
+        <div style="padding:16px;background:linear-gradient(180deg,rgba(${parseInt(c1.slice(1,3),16)},${parseInt(c1.slice(3,5),16)},${parseInt(c1.slice(5,7),16)},.08),transparent);">
+          <div style="height:7px;border-radius:100px;background:rgba(255,255,255,.12);width:70%;margin-bottom:6px;"></div>
+          <div style="height:5px;border-radius:100px;background:rgba(255,255,255,.07);width:90%;margin-bottom:4px;"></div>
+          <div style="height:5px;border-radius:100px;background:rgba(255,255,255,.07);width:55%;margin-bottom:12px;"></div>
+          <div style="background:linear-gradient(90deg,${c1},${c2});color:#fff;
+                      border-radius:100px;padding:6px 14px;
+                      font-size:9px;font-weight:700;display:inline-block;
+                      box-shadow:0 4px 12px rgba(124,92,252,.4);">Hubungi Kami →</div>
+        </div>
+      </div>
+      ${wm}
+    </div>`;
   }
- 
+
   // Fallback
   return `<div style="background:linear-gradient(135deg,${c1},${c2});
-                      min-height:200px;border-radius:12px;
-                      display:flex;align-items:center;justify-content:center;">
-    ${logoBlock}
+                min-height:${h};border-radius:20px;
+                display:flex;align-items:center;justify-content:center;">
+    ${buildLogoBlock ? buildLogoBlock(0.5, true) : ini}
   </div>`;
 }
 function renderPaletteChips(){
@@ -1860,16 +1958,54 @@ function renderFontPairs(){
 }
 function openMockupFull(){
   const display=document.getElementById('mockup-display');
-  document.getElementById('mkp-modal-title').textContent=MOCKUP_TYPES[activeMockupTab]?.label||'Mockup';
-  document.getElementById('mkp-modal-content').innerHTML=display?display.innerHTML:'';
+  const label=MOCKUP_TYPES[activeMockupTab]?.label||'Mockup';
+  document.getElementById('mkp-modal-title').textContent=label+' Preview';
+  document.getElementById('mkp-modal-sub').textContent=MOCKUP_TYPES[activeMockupTab]?.key?.toUpperCase()+' · Tap di luar untuk tutup';
+  const content=document.getElementById('mkp-modal-content');
+  // Render ulang dengan ukuran lebih besar di modal
+  const tabKey=MOCKUP_TYPES[activeMockupTab]?.key||'card';
+  const logoHTML=bState.selectedLogoHTML||bState.logoSVG;
+  content.innerHTML=renderMockupHTML(tabKey,logoHTML);
+  // Tambah class wrap
+  content.className='mkp-modal-content-wrap';
   document.getElementById('mkp-modal').classList.add('show');
 }
 function closeMkpModal(){document.getElementById('mkp-modal').classList.remove('show')}
+
+// Download menggunakan html2canvas (resolusi tinggi)
 function downloadMockup(){
+  downloadMockupCanvas();
+}
+async function downloadMockupCanvas(){
+  const dlBtn=document.getElementById('dl-btn-main')||document.getElementById('dl-btn-modal');
+  if(dlBtn){dlBtn.textContent='⏳ Proses...';dlBtn.disabled=true;}
+  // Cek apakah html2canvas tersedia
+  if(typeof html2canvas==='function'){
+    try{
+      const el=document.getElementById('mkp-modal-content').firstElementChild
+               ||document.getElementById('mockup-display').firstElementChild
+               ||document.getElementById('mockup-display');
+      const isHD=(currentUser&&(currentUser.status==='premium'||currentUser.status==='pro'));
+      const scale=isHD?3:1.5; // HD = 3x, free = 1.5x
+      const canvas=await html2canvas(el,{scale,useCORS:true,allowTaint:true,backgroundColor:null,logging:false});
+      const link=document.createElement('a');
+      link.download=`${bState.name||'brand'}-mockup-${MOCKUP_TYPES[activeMockupTab]?.key||'preview'}.png`;
+      link.href=canvas.toDataURL('image/png',1.0);
+      link.click();
+      if(currentUser){currentUser.downloads=(currentUser.downloads||0)+1;localStorage.setItem('bbk_user',JSON.stringify(currentUser))}
+      toast(isHD?'✅ Mockup HD didownload!':'✅ Download berhasil! (Upgrade untuk HD tanpa watermark)','success');
+    }catch(err){
+      console.error('html2canvas error:',err);
+      toast('Download gagal, coba lagi','error');
+    }
+  }else{
+    // Fallback jika html2canvas belum load
+    if(currentUser&&(currentUser.status==='premium'||currentUser.status==='pro'))toast('Mockup HD didownload! ✅','success');
+    else toast('Download berhasil + watermark. Upgrade untuk HD!','info');
+    if(currentUser){currentUser.downloads=(currentUser.downloads||0)+1;localStorage.setItem('bbk_user',JSON.stringify(currentUser))}
+  }
   closeMkpModal();
-  if(currentUser&&(currentUser.status==='premium'||currentUser.status==='pro'))toast('Mockup didownload (HD)! ✅','success');
-  else toast('Download berhasil + watermark. Upgrade untuk HD!','info');
-  if(currentUser){currentUser.downloads=(currentUser.downloads||0)+1;localStorage.setItem('bbk_user',JSON.stringify(currentUser))}
+  if(dlBtn){dlBtn.textContent='⬇ Download PNG';dlBtn.disabled=false;}
 }
 
 // ================================================================
