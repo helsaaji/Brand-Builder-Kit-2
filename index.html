@@ -2684,55 +2684,7 @@
       gap: 8px
     }
 
-    /* MODAL */
-    .mkp-modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, .8);
-      z-index: 9500;
-      display: none;
-      align-items: flex-end;
-      justify-content: center;
-      backdrop-filter: blur(8px)
-    }
-
-    .mkp-modal.show {
-      display: flex;
-      animation: fadeIn .25s ease
-    }
-
-    .mkp-modal-inner {
-      background: var(--bg2);
-      border-radius: 24px 24px 0 0;
-      padding: 20px;
-      width: 100%;
-      max-width: 430px;
-      box-shadow: 0 -20px 60px rgba(0, 0, 0, .5);
-      max-height: 85vh;
-      overflow-y: auto
-    }
-
-    .mkp-modal-title {
-      font-family: var(--font-display);
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--text)
-    }
-
-    .mkp-modal-close {
-      background: var(--surface);
-      border: none;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: var(--transition);
-      color: var(--text2)
-    }
+    /* MODAL — duplicate removed, using the Canva-style one above */
 
     /* ==============================
    SCREEN: TEMPLATES
@@ -5904,9 +5856,16 @@
     ];
 
     // State for mockup gallery
-    let mkpViewMode = 'grid';      // 'grid' | 'carousel'
-    let mkpActiveCat = 'Semua';    // category filter
-    let mkpActiveKey = 'card';     /    function initMockupStep() {
+    let mkpViewMode = 'grid';        // 'grid' | 'carousel'
+    let mkpActiveCat = 'Semua';      // category filter
+    let mkpActiveKey = 'card';       // currently active mockup key
+    let mkpSearchQuery = '';         // search text
+    let mkpSortOption = 'newest';    // sort option
+    let mkpCarouselIdx = 0;          // carousel position
+    let mkpFavorites = JSON.parse(localStorage.getItem('bbk_favorites') || '[]');
+    let mkpRecentUsed = JSON.parse(localStorage.getItem('bbk_recent') || '[]');
+
+    function initMockupStep() {
       // Widescreen expansion
       document.getElementById('app').classList.add('mockup-wide');
 
@@ -7018,6 +6977,18 @@
       });
     }
 
+    // ================================================================
+    // SOCIAL MEDIA FEED LIVE UPDATE
+    // ================================================================
+    function updateSocialFeed() {
+      const titleInput = document.getElementById('social-title-input');
+      const subInput = document.getElementById('social-sub-input');
+      const layoutSelect = document.getElementById('social-layout-select');
+      const themeSelect = document.getElementById('social-theme-select');
+      // For now delegate to renderSocialFeed which reads from bState
+      // In a future update, layout/theme/title/subtitle values can be consumed here
+      renderSocialFeed();
+    }
 
     // ================================================================
     // SOCIAL MEDIA
@@ -7130,7 +7101,7 @@
       document.getElementById('bd-font').textContent = currentBrand.name; document.getElementById('bd-font').style.fontFamily = (currentBrand.headingFont || 'Syne') + ',sans-serif';
       Object.assign(bState, { ...currentBrand, logoVariant: currentBrand.logoVariant || 0, accentColor: currentBrand.accentColor || c });
       const disp = document.getElementById('bd-mockup-display');
-      if (disp) disp.innerHTML = renderMockupHTML('feed', currentBrand.logoSVG || '');
+      if (disp) disp.innerHTML = renderMockupHTML('card', currentBrand.logoSVG || '');
       screenHistory.push('brand');
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
       document.getElementById('screen-brand').classList.add('active');
